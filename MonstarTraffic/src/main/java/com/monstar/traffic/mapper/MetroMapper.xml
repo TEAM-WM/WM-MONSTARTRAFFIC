@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 230920 / 리연 추가 -->
+<mapper namespace="com.monstar.traffic.dao.MetroDao">
+
+	<select id="list" resultType="com.monstar.traffic.dto.MetroElevatorDto">
+		SELECT * FROM METRO_ELEVATOR
+	</select>
+	<select id="list2" resultType="com.monstar.traffic.dto.MetroJamDto">
+		SELECT * FROM METRO_CONGESTION WHERE DEPARTURESTATION='서울역' AND LINENAME=1
+	</select>
+</mapper>

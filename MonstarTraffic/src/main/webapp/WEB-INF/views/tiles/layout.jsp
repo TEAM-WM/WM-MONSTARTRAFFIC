@@ -12,22 +12,24 @@
 <title>몬스타트래픽</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/base.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 	<div class="container">
-		<tiles:insertAttribute name="header"/>
+		<tiles:insertAttribute name="header" />
 		<main>
-			<tiles:insertAttribute name="aside"/>
+			<tiles:insertAttribute name="aside" />
 			<article class="content-wrap">
-				<tiles:insertAttribute name="main"/>
+				<tiles:insertAttribute name="main" />
 			</article>
 		</main>
-		<tiles:insertAttribute name="footer"/>
+		<tiles:insertAttribute name="footer" />
 	</div>
 	<!-- 스크립트 구역 -->
-    <script src="https://kit.fontawesome.com/183a0f8087.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app.js"></script>
+	<script src="https://kit.fontawesome.com/183a0f8087.js"
+		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/assets/js/app.js"></script>
 </body>
 </html>
