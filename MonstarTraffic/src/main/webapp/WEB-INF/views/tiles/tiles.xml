@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- 공지사항 레이아웃 -->
+	<definition name="commonlayout2"
+		template="/WEB-INF/views/tiles/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/layout/header.jsp" />
+		<put-attribute name="aside"
+			value="/WEB-INF/views/tiles/layout/aside2.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/layout/footer.jsp" />
+	</definition>
+
+	<definition name="common/notice/*" extends="commonlayout2">
+		<put-attribute name="main"
+			value="/WEB-INF/views/common/notice/{1}.jsp" />
+	</definition>
+
+	<!-- 사용자 레이아웃 -->
+	<definition name="commonlayout"
+		template="/WEB-INF/views/tiles/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/layout/header.jsp" />
+		<put-attribute name="aside"
+			value="/WEB-INF/views/tiles/layout/aside.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/layout/footer.jsp" />
+	</definition>
+
+	<definition name="common/*/*" extends="commonlayout">
+		<put-attribute name="main"
+			value="/WEB-INF/views/common/{1}/{2}.jsp" />
+	</definition>
+
+
+
+	<!-- 메인 레이아웃 -->
+	<definition name="*"
+		template="/WEB-INF/views/tiles/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/views/tiles/layout/header.jsp" />
+		<put-attribute name="aside"
+			value="/WEB-INF/views/tiles/layout/aside.jsp" />
+		<put-attribute name="main"
+			value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/tiles/layout/footer.jsp" />
+	</definition>
+</tiles-definitions>
