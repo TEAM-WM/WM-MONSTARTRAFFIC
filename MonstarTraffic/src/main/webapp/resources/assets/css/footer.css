@@ -1,0 +1,29 @@
+/* 하단 footer */
+
+.global-footer {
+    width: 100%;
+    border-top: 1px solid #dcdcdc;
+    background-color: #f4f4f4;
+}
+
+.global-footer-container {
+    margin: 0 auto;
+    width: var(--desktop-size);
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1.3em;
+    padding: 20px 0;
+    background-color: #f4f4f4;
+}
+.global-footer-container *{
+    font-size: var(--font-small);
+}
+.global-footer-container address{
+    font-style: normal;
+}
+.global-footer-container p{
+    color: #888;
+}

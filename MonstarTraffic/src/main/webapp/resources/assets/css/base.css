@@ -1,0 +1,27 @@
+@import url('https://webfontworld.github.io/score/SCoreDream.css');
+
+@import url(./header.css);
+@import url(./global.css);
+@import url(./main.css);
+@import url(./footer.css);
+
+/* base*/
+:root {
+    /* Color */
+    --color-white: #fefefe;
+    --color-gray: #e7e7e7;
+    --color-black: #0b0b0b;
+    --color-main: #3366CC;
+    --color-main-dark: #342B98;
+    --color-sub:#e2e8f9;
+
+    /* Font size */
+    --font-large: 32px;
+    --font-medium: 20px;
+    --font-regular: 16px;
+    --font-small: 14px;
+    --font-micro: 10px;
+
+    /* Size */
+    --desktop-size: 1200px;
+}
