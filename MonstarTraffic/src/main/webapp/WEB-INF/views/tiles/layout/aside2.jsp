@@ -13,7 +13,9 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/notice">공지사항</a></li>
+				<li>
+					<a href="${pageContext.request.contextPath}/notice">공지사항</a>
+				</li>
 			</ul>
 		</nav>
 	</aside>
