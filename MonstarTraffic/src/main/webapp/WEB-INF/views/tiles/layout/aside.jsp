@@ -13,8 +13,8 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="">지하철 엘레베이터 정보</a></li>
-				<li><a href="">지하철 혼잡도 정보</a></li>
+				<li><a href="${pageContext.request.contextPath}/metro/elevator">지하철 엘레베이터 정보</a></li>
+				<li><a href="${pageContext.request.contextPath}/metro/jam">지하철 1~8호선 혼잡도 정보</a></li>
 				<li><a href="">지하철 엘레베이터 정보</a></li>
 			</ul>
 		</nav>
