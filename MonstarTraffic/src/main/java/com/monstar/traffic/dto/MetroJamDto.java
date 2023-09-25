@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class MetroJamDto {
 	private Double serial_number;		// 연번 - 일련번호
 	private String dayofweekdivision;	// 요일구분 - 평일 토요일 공휴일 요일 구분 
-	private Double linename;			// 지하철 호선
+	private int linename;			// 지하철 호선
 	private Double externalstationcode; // 외부역 코드
 	private String departurestation;	// 출발역 이름
 	private String divisionname;		// 운행방향
