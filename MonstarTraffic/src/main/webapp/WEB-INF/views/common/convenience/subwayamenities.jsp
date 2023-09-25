@@ -9,29 +9,33 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Kakao Maps JavaScript API -->
  
 <style>
 h3 {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 가운데 정렬 */
 padding-left: 20px;
 }
 
 div {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 가운데 정렬 */
 padding-top: 20px;
 padding-bottom: 20px;
-width: 80%;
+margin-bottom: 30px;
+width: 90%;
 z-index: 1; /* 다른 요소 위에 표시 */
 }
 
 table {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 가운데 정렬 */
 padding-top: 20px;
 text-align: center;
 border-collapse: collapse;
 width: 80%;
+}
+
+.input-group {
+margin-top: 70px;
+width: 70%
 }
 </style>
 </head>
@@ -114,8 +118,33 @@ width: 80%;
             }
         }
     });
+    
+    //역명 검색
+    function searchStation() {
+        var searchKeyword = document.getElementById('stationSearch').value.toLowerCase(); // 검색어를 소문자로 변환하여 대소문자 구분 없이 검색
+
+        var table = document.getElementById('amenityTable');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 1; i < rows.length; i++) {
+            var stationName = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase(); // 역명을 소문자로 변환
+
+            if (stationName.includes(searchKeyword)) {
+                rows[i].style.display = ''; // 검색어가 역명에 포함되면 해당 행을 표시
+            } else {
+                rows[i].style.display = 'none'; // 그렇지 않으면 해당 행을 숨김
+            }
+        }
+    }
+
 </script>
+
 <hr />
+<!-- 역명 검색창 -->
+<div class="input-group">
+    <input type="text" id="stationSearch" class="form-control" placeholder="지하철 역명을 입력하세요." />
+    <button class="btn btn-primary" onclick="searchStation()">검색</button>
+</div>
 
 	<table border="1" id="amenityTable">
     <tr>
@@ -142,15 +171,12 @@ width: 80%;
 </section>
 
 <script>
-	document.title = "MONPIS :: 서울 지하철 내 노약자, 장애인 편의시설 현황"; 
+	document.title = "MonstarTraffic :: 서울 지하철 역사 내 취약계층을 위한 편의시설 정보"; 
 </script>
+<hr />
 </body>
 
 <footer>
-    <p>데이터 출처: 서울시 공공데이터 포털(<a href="">링크</a>)</p>
+    <p>데이터 출처: 서울시 공공데이터 포털(<a href="http://data.seoul.go.kr/dataList/OA-11573/S/1/datasetView.do">링크</a>)</p>
 </footer>
-
-<script>
-console.log${sumLine};
-</script>
 </html>

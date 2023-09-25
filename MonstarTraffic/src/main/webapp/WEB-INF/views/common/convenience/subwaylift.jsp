@@ -14,17 +14,19 @@
 
 <style>
 h3 {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 가운데 정렬 */
+padding-left: 20px;
 }
 
 div {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
-padding-bottom: 20px;
+margin: 0 auto; /* 가운데 정렬 */
+padding-top: 20px;
+padding-bottom: 30px;
 z-index: 1; /* 다른 요소 위에 표시 */
 }
 
 div #map {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 가운데 정렬 */
 padding-top: 20px;
 margin-bottom: 50px;
 width: 90%;
@@ -32,69 +34,35 @@ height: 500px;
 }
 
 .input-group {
-width: 50%;
-}
-
-.container {
 margin-top: 50px;
+width: 70%;
 }
 
 #tableButton {
-margin-top: 10px;
+margin-top: 20px;
 margin-bottom: 20px;
 }
 
 table {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 가운데 정렬 */
 text-align: center;
 border-collapse: collapse;
 width: 80%;
 }
+
 </style>
 </head>
 
 <body>
-	<header><h3>지하철 출입구 리프트 정보</h3></header>
-<br />
+	<header><h3>지하철 출입구 휠체어리프트 정보</h3></header>
 <section>
+
 <!-- 읍면동 검색 창 div 입니다 -->
 <div class="input-group">
-    <input type="text" id="searchKeyword" class="form-control" placeholder="OO동/역명 을 입력하세요." />
+    <input type="text" id="searchKeyword" class="form-control" placeholder="지하철 역명을 입력하세요." />
     <button class="btn btn-primary" onclick="searchLocation()">검색</button>
+    
 </div>
-
-<script>
- //검색 버튼 클릭 시 실행되는 함수
-	function searchLocation() {
-	    var keyword = document.getElementById('searchKeyword').value;
-	
-	    // 주소나 장소명으로 좌표 검색을 수행합니다.
-	    var geocoder = new kakao.maps.services.Geocoder();
-	
-	    geocoder.addressSearch(keyword, function(result, status) {
-	        if (status === kakao.maps.services.Status.OK) {
-	            // 검색 결과가 있을 경우 첫 번째 결과의 좌표를 가져옵니다.
-	            var lat = result[0].y;
-	            var lng = result[0].x;
-	
-	            // 좌표를 LatLng 객체로 변환하여 지도의 중심을 해당 좌표로 이동합니다.
-	            var center = new kakao.maps.LatLng(lat, lng);
-	            map.setCenter(center);
-	
-	            // 마커를 추가하고 표시하는 코드도 여기에 추가할 수 있습니다.
-	            var markerPosition = new kakao.maps.LatLng(lat, lng);
-	            var marker = new kakao.maps.Marker({
-	                position: markerPosition
-	            });
-	            marker.setMap(map);
-	        } else {
-	            // 검색 결과가 없을 경우 메시지를 표시합니다.
-	            alert('검색 결과가 없습니다.');
-	        }
-	    });
-	}
-
-</script>
 
 <!-- 지도를 표시할 div 입니다 -->
 <div id="map"></div>
@@ -110,9 +78,10 @@ width: 80%;
         };
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        // 서버에서 받은 위치 정보를 반복해서 지도에 표시합니다.
-			jArray.forEach(function(item) {
+     // 서버에서 받은 위치 정보를 반복해서 지도에 표시합니다.
+        jArray.forEach(function(item) {
             var wktPoint = item.node_wkt; // 위치 정보 (예: "POINT(127.02748750839716 37.49883559708308)")
+            var subwayName = item.sw_nm; // 지하철 역명
             
             // WKT 문자열에서 좌표 추출
             var match = wktPoint.match(/POINT\(([^ ]+) ([^)]+)\)/);
@@ -123,11 +92,50 @@ width: 80%;
                 // 좌표를 LatLng 객체로 변환하여 지도에 마커로 표시
                 var markerPosition = new kakao.maps.LatLng(lat, lng);
                 var marker = new kakao.maps.Marker({
-                    position: markerPosition
+                    position: markerPosition,
+                    map: map
                 });
-                marker.setMap(map);
+
+             // 마커 위에 텍스트 표시 (hidden으로 숨겨진 지하철역명)
+                var label = new kakao.maps.CustomOverlay({
+                    position: markerPosition,
+                    content: '<div class="label" hidden>' + subwayName + '</div>', // hidden 속성 추가
+                    zIndex: 1
+                });
+
+                // 커스텀 오버레이를 지도에 표시
+                label.setMap(map);
             }
         });
+        
+        function searchLocation() {
+            var keyword = document.getElementById('searchKeyword').value; // 검색창의 값을 가져옵니다.
+            
+            // jArray에서 해당 지하철역명과 일치하는 데이터를 찾습니다.
+            var targetData = jArray.find(function(item) {
+                return item.sw_nm === keyword;
+            });
+
+            if (targetData) {
+                var wktPoint = targetData.node_wkt;
+                var match = wktPoint.match(/POINT\(([^ ]+) ([^)]+)\)/);
+                if (match) {
+                    var lng = parseFloat(match[1]);
+                    var lat = parseFloat(match[2]);
+
+                    // 해당 지하철역의 위치로 지도 이동 및 확대
+                    var moveLatLng = new kakao.maps.LatLng(lat, lng);
+                    map.setCenter(moveLatLng);
+                    
+                    // 확대 레벨 조정 (예: 12는 원하는 확대 레벨)
+                    map.setLevel(3);
+                }
+            } else {
+                // 일치하는 데이터를 찾지 못한 경우 처리 (예: 메시지 출력)
+                alert('검색 결과를 찾을 수 없습니다.');
+            }
+        }
+
     </script>
     
 <hr />
@@ -194,7 +202,7 @@ width: 80%;
             data: {
                 labels: sggNms,
                 datasets: [{
-                    label: '# 서울 지역구별 지하철 출입구 리프트 개수',
+                    label: '# 서울 각 구별 지하철 출입구 휠체어리프트 개수',
                     data: sggCounts,
                     backgroundColor: [
                     	'#062d6b',   /* Dark Navy */
@@ -210,7 +218,7 @@ width: 80%;
                 plugins: {
                     title: {
                         display: true,
-                        text: '서울 지역구별 지하철 출입구 리프트 현황', // 제목
+                        text: '서울 각 구별 지하철 출입구 휠체어리프트 현황', // 제목
                         font: {
                             size: 18 // 글꼴 크기를 조절하세요
                         }
@@ -225,7 +233,7 @@ width: 80%;
             data: {
                 labels: emdNms,
                 datasets: [{
-                    label: '# 서울 각 동별 지하철 출입구 리프트 개수',
+                    label: '# 서울 각 동별 지하철 출입구 휠체어리프트 개수',
                     data: emdCounts,
                     backgroundColor: [
                     	'#062d6b',   /* Dark Navy */
@@ -241,7 +249,7 @@ width: 80%;
                 plugins: {
                     title: {
                         display: true,
-                        text: '서울 각 동별 지하철 출입구 리프트 현황', // 제목
+                        text: '서울 각 동별 지하철 출입구 휠체어리프트 현황', // 제목
                         font: {
                             size: 18
                         }
@@ -306,7 +314,7 @@ width: 80%;
     	 <br/>
 
 <script>
-	document.title = "MONPIS :: 서울시 지하철 출입구 리프트 위치정보"; 
+	document.title = "MonstarTraffic :: 서울시 지하철 출입구 휠체어리프트 위치정보"; 
 </script>
 </section>
     <hr />
