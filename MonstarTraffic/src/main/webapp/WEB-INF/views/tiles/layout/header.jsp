@@ -14,17 +14,15 @@
 			</h1>
 			<nav>
 				<ul>
-					<li class="sub-dropdown"><a href="">서울시 교통정보 열람</a>
+					<li class="sub-dropdown"><a>서울시 교통정보 열람</a>
 						<div class="sub-menu">
 							<ul>
-								<li><a href="">지하철 엘레베이터 정보</a></li>
-								<li><a href="">지하철 혼잡도 정보</a></li>
-								<li><a href="">지하철 엘레베이터 정보</a></li>
-								<li><a href="">지하철 혼잡도 정보</a></li>
-								<li><a href="">지하철 엘레베이터 정보</a></li>
-								<li><a href="">지하철 혼잡도 정보</a></li>
-								<li><a href="">지하철 엘레베이터 정보</a></li>
-								<li><a href="">지하철 혼잡도 정보</a></li>
+								<li>
+									<a href="${pageContext.request.contextPath}/metro/elevator">지하철 엘레베이터 정보</a>
+								</li>
+								<li>
+									<a href="${pageContext.request.contextPath}/metro/jam">지하철 1~8호선 혼잡도 정보</a>
+								</li>
 							</ul>
 						</div></li>
 					<li><a href="${pageContext.request.contextPath}/notice">알림마당</a></li>

@@ -32,13 +32,10 @@ public class MetroElevatorService implements ServiceInterface{
 		MetroDao dao = sqlSession.getMapper(MetroDao.class);
 		// 차트
 //		JSONArray jsonArray = new JSONArray();
-		ArrayList<MetroElevatorDto> dto = dao.list();
+		ArrayList<MetroElevatorDto> dto = dao.listElevator();
 
 		ArrayList<JSONObject> jsonList = new ArrayList<JSONObject>(); // JSON 객체를 담을 리스트
 		
-		
-
-		ArrayList<JSONObject> jsonList2 = new ArrayList<JSONObject>(); // JSON 객체를 담을 리스트
 		for (MetroElevatorDto d : dto) {
 			Map<Object, Object> map = new HashMap<>();
 			map.put("type", d.getType());
