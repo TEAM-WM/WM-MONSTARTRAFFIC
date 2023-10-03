@@ -57,6 +57,7 @@ main {
 
 .content-wrap >section{
     width: 100%;
+    margin-bottom:50px;
 }
 
 /*카테고리리스트*/
