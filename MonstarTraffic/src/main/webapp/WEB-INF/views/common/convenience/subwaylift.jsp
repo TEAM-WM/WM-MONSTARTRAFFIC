@@ -7,61 +7,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <!-- Kakao Maps JavaScript API -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98444eefa8d89c60d220fff58bde50de"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98444eefa8d89c60d220fff58bde50de"></script>
 
 <style>
-h3 {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
-}
-
+/* 
 div {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+margin: 0 auto; /* 테이블을 가운데로 정렬 
 padding-bottom: 20px;
-z-index: 1; /* 다른 요소 위에 표시 */
-}
+} */
 
-div #map {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+div#map {
 padding-top: 20px;
 margin-bottom: 50px;
-width: 90%;
 height: 500px;
+z-index: 1; /* 다른 요소 위에 표시 */
 }
-
+/* 
 .input-group {
 width: 50%;
-}
+} */
 
-.container {
+/* .container {
 margin-top: 50px;
 }
-
+ */
 #tableButton {
 margin-top: 10px;
 margin-bottom: 20px;
 }
 
-table {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
+/* table {
+margin: 0 auto; /* 테이블을 가운데로 정렬
 text-align: center;
 border-collapse: collapse;
 width: 80%;
-}
+} */
 </style>
 </head>
 
 <body>
 	<header><h3>지하철 출입구 리프트 정보</h3></header>
-<br />
 <section>
 <!-- 읍면동 검색 창 div 입니다 -->
-<div class="input-group">
-    <input type="text" id="searchKeyword" class="form-control" placeholder="OO동/역명 을 입력하세요." />
-    <button class="btn btn-primary" onclick="searchLocation()">검색</button>
-</div>
+		<div class="search-wrap">
+			<div class="search-form-wrap">
+					<input type="text" id="searchKeyword" class="form-control" placeholder="OO동/역명 을 입력하세요." />
+					<input type="button" value="검색"  onclick="searchLocation()">
+			</div>
+		</div>
 
 <script>
  //검색 버튼 클릭 시 실행되는 함수
@@ -129,20 +127,17 @@ width: 80%;
             }
         });
     </script>
-    
-<hr />
-<!-- 그래프를 표시할 div 입니다 -->
- <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <canvas width="400" height="400" id="myChart1"></canvas>
-            </div>
-            <div class="col-md-6">
-                <canvas width="400" height="400" id="myChart2"></canvas>
-            </div>
-        </div>
-    </div>
 
+<!-- 그래프를 표시할 div 입니다 -->
+<div class="space">
+	<div>
+		<canvas width="450" height="450" id="myChart1"></canvas>
+	</div>
+	<div>
+		<canvas width="450" height="450" id="myChart2"></canvas>
+	</div>
+</div>
+</section>
     <script>
     // 그래픽 차트 2개의 폰트 설정
     Chart.defaults.font.family = 'SCoreDream';
@@ -257,7 +252,7 @@ width: 80%;
         
     </script>
 
-    <hr />
+<section>
 <button id="tableButton">테이블 숨기기/보이기</button>
 
 <script>
@@ -274,7 +269,7 @@ width: 80%;
     var tableButton = document.getElementById('tableButton');
     tableButton.addEventListener('click', toggleTable);
 </script>
-	<table border="1" id="liftTable" style="display: none;">
+	<table id="liftTable" style="display: none;">
     <tr>
 		<td>타입</td>
 		<td hidden>위치</td>
@@ -303,17 +298,17 @@ width: 80%;
     	</tr>
 	</c:forEach>
 	</table>
-    	 <br/>
-
 <script>
 	document.title = "MONPIS :: 서울시 지하철 출입구 리프트 위치정보"; 
 </script>
 </section>
-    <hr />
+<footer>
+	<p>
+		데이터 출처: 서울시 공공데이터 포털(
+		<a href="http://data.seoul.go.kr/dataList/OA-21211/S/1/datasetView.do">링크</a>)
+	</p>
+</footer>
 </body>
 
-<footer>
-    <p>데이터 출처: 서울시 공공데이터 포털(<a href="http://data.seoul.go.kr/dataList/OA-21211/S/1/datasetView.do">링크</a>)</p>
-</footer>
 
 </html>

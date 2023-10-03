@@ -7,42 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 
 <!-- Kakao Maps JavaScript API -->
- 
-<style>
-h3 {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
-padding-left: 20px;
-}
-
-div {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
-padding-top: 20px;
-padding-bottom: 20px;
-width: 80%;
-z-index: 1; /* 다른 요소 위에 표시 */
-}
-
-table {
-margin: 0 auto; /* 테이블을 가운데로 정렬 */
-padding-top: 20px;
-text-align: center;
-border-collapse: collapse;
-width: 80%;
-}
-</style>
 </head>
 
 <body>
-<header><h3>지하철 역사 내 편의시설 정보</h3></header>
+	<header>
+		<h3>지하철 역사 내 편의시설 정보</h3>
+	</header>
 
-<section>
-<div>
-    <canvas id="lineChart" width="800" height="400"></canvas>
-</div>
+	<section>
+		<div>
+			<canvas id="lineChart" width="800" height="400"></canvas>
+		</div>
 
 <script>
 // 그래픽 차트의 폰트 설정
@@ -115,41 +94,42 @@ width: 80%;
         }
     });
 </script>
-<hr />
+	</section>
 
-	<table border="1" id="amenityTable">
-    <tr>
-		<td>호선</td>
-		<td>역명</td>
-		<td>엘리베이터</td>
-		<td>에스컬레이터</td>
-		<td>휠체어리프트</td>
-		<td>수평자동보도</td>
-	</tr>
+	<section>
+		<table border="1" id="amenityTable">
+			<tr>
+				<td>호선</td>
+				<td>역명</td>
+				<td>엘리베이터</td>
+				<td>에스컬레이터</td>
+				<td>휠체어리프트</td>
+				<td>수평자동보도</td>
+			</tr>
 
-	<c:forEach items="${amenityinfo }" var="amenityinfo">
-		<tr>
-		<td>${amenityinfo.line }</td>
-		<td>${amenityinfo.statn_nm }</td>
-		<td>${amenityinfo.elvtr }</td>
-    	<td>${amenityinfo.escltr }</td>
-    	<td>${amenityinfo.wheelchair_lift }</td>
-    	<td>${amenityinfo.hrzntlty_atmc_ftpth }</td>
-    	</tr>
-	</c:forEach>
-	</table>
-    	 <br/>
-</section>
+			<c:forEach items="${amenityinfo }" var="amenityinfo">
+				<tr>
+					<td>${amenityinfo.line }</td>
+					<td>${amenityinfo.statn_nm }</td>
+					<td>${amenityinfo.elvtr }</td>
+					<td>${amenityinfo.escltr }</td>
+					<td>${amenityinfo.wheelchair_lift }</td>
+					<td>${amenityinfo.hrzntlty_atmc_ftpth }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</section>
 
-<script>
+
+	<script>
 	document.title = "MONPIS :: 서울 지하철 내 노약자, 장애인 편의시설 현황"; 
-</script>
-</body>
-
+	</script>
 <footer>
-    <p>데이터 출처: 서울시 공공데이터 포털(<a href="">링크</a>)</p>
+	<p>
+		데이터 출처: 서울시 공공데이터 포털(<a href="">링크</a>)
+	</p>
 </footer>
-
+</body>
 <script>
 console.log${sumLine};
 </script>
