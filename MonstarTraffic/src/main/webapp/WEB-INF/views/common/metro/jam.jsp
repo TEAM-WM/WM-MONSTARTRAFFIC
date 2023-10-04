@@ -49,10 +49,18 @@
 					<c:set var="lineValue" value="${param.line}" />
 				</c:otherwise>
 			</c:choose>
+			<c:choose>
+				<c:when test="${empty param.station}">
+					<c:set var="stationValue" value="서울역" />
+				</c:when>
+				<c:otherwise>
+					<c:set var="stationValue" value="${param.station}" />
+				</c:otherwise>
+			</c:choose>
 			<div class="category-sub">
 				<ul>
 					<c:forEach var="dto" items="${linelist }">
-						<li class="${param.station == dto.departurestation ? 'active' : ''}">
+						<li class="${stationValue == dto.departurestation ? 'active' : ''}">
 							<a
 							href="${ctx}/metro/jam?line=${lineValue}&station=${dto.departurestation}">${dto.departurestation}</a>
 						</li>
@@ -95,10 +103,10 @@
 	</section>
 	<script>
 	
-	let jArray = new Array();
+	 let jArray = new Array();
 	 jArray = '${list}';
 	 jArray = JSON.parse(jArray);
-	
+	 Chart.defaults.font.family = 'SCoreDream';
 	 const ctx = document.getElementById('Chart').getContext('2d');
 	
 	 const labels = ["5시30분~6시", "6시~6시30분", "6시30분~7시",
