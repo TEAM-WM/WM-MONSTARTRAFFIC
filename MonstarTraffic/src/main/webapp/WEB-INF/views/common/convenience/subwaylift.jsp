@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="f"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +54,7 @@ width: 80%;
 </style>
 </head>
 
-<body>
+ <body>
 	<header><h3>지하철 출입구 휠체어리프트 정보</h3></header>
 <section>
 

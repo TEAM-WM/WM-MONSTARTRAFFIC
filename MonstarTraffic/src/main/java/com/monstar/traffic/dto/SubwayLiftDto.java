@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//	(효슬) 서울시 지하철 출입구 리프트 위치정보
+//	(효슬) 서울시 지하철 출입구 휠체어리프트 위치정보
 public class SubwayLiftDto {	
 	private String type;			//노드링크 유형
 	private String node_wkt;	//노드 WKT

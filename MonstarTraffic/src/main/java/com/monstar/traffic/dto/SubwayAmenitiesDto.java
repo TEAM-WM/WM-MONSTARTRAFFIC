@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-//	(효슬) 서울 지하철 내 엘리베이터, 휠체어리프트 등 노약자, 장애인 편의시설 현황
+//	(효슬) 서울 지하철 역사 내 엘리베이터, 에스컬레이터, 휠체어리프트, 수평자동보도 편의시설 현황
 public class SubwayAmenitiesDto {
 
 	private String line;	//지하철 호선
