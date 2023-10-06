@@ -11,16 +11,18 @@
 .overlay {	
 	padding:20px;
 	position: absolute;
-	right: 20px;
+	left: 50%;
+	transform: translateX(-50%);
 	top: 20px;
 	border-radius: 10px;
-	background:rgb(255 255 255 / 50%);
+	background:rgb(255 255 255 / 80%);
 	border: 1px solid #ccc;
 	z-index:9999;
 	line-height:2em;
 }
 .overlay >p {
 	font-weight:500;
+	display:inline-block;
 }
 .overlay >p >span{
 	position:relative;
@@ -62,7 +64,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-			level : 9
+			level : 8
 		// 지도의 확대 레벨
 		};
 
