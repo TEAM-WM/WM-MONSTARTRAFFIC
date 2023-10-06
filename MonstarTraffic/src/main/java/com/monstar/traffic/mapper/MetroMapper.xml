@@ -3,10 +3,29 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 230920 / 리연 추가 -->
 <mapper namespace="com.monstar.traffic.dao.MetroDao">
-
+	<!-- 
+	=======================
+	지하철 엘레베이터 위치
+	=======================
+	-->
+	<!-- 엘레베이터 전체 정보 -->
 	<select id="listElevator" resultType="com.monstar.traffic.dto.MetroElevatorDto">
 		SELECT * FROM METRO_ELEVATOR
 	</select>
+	
+	<!-- 서울시 구역별 지하철 엘레베이터 갯수 -->
+	<select id="listElevatorSGG" resultType="com.monstar.traffic.dto.MetroElevatorDto">
+		SELECT COUNT(*) AS SGG_COUNT, SGG_NM 
+		FROM METRO_ELEVATOR 
+		GROUP BY SGG_NM 
+		ORDER BY SGG_NM ASC
+	</select>
+	
+	<!-- 
+	=======================
+	지하철 혼잡도
+	=======================
+	-->
 	
 	<!-- 호선별 혼잡도 정보 -->
 	<select id="listJam" parameterType="com.monstar.traffic.dto.MetroJamDto" resultType="com.monstar.traffic.dto.MetroJamDto">

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class MetroElevatorDto {
+	private int sgg_count; //시군구별 엘레베이터 갯수
 	private String type;     // 노드링크유형
 	private String node_wkt; // 노드 위도 경도
 	private Double node_id;    // 노드 id
