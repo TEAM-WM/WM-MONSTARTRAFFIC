@@ -49,7 +49,7 @@ public class BikeController {
 		service = new BikeNoticeService(session);
 		service.execute(model);
 		
-		return "common/bike/bikeNotice";
+		return "common/notice/bikeNotice";
 	}//method
 	
 	// 공지사항 디테일
@@ -60,7 +60,7 @@ public class BikeController {
 		service = new BikeNoticeDetailService(session);
 		service.execute(model);
 		
-		return "common/bike/bikeNoticeDetail";
+		return "common/notice/bikeNoticeDetail";
 	}//method
 	
 }//home
