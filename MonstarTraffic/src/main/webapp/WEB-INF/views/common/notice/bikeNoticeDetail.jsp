@@ -20,7 +20,7 @@
 			<col width="20%">
 		</colgroup>
 		<tr>
-			<th>${dto.btitle }</th>
+			<th class="left">${dto.btitle }</th>
 			<td><fmt:formatDate value="${dto.bdate }" pattern="yyyy.MM.dd"/></td>
 		</tr>
 		<tr>

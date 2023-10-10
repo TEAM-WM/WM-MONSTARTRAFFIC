@@ -14,7 +14,16 @@
 	</insert>
 	
 	<select id="getData" parameterType="int" resultType="com.monstar.traffic.dto.NoticeDto">
-		SELECT * FROM METRO_NOTICE
+		SELECT * FROM(SELECT
+		NO,
+		LEAD(NO,1,9999) OVER(ORDER BY NO) AS NEXT,
+		LAG(NO,1,9999) OVER(ORDER BY NO) AS LAST,
+		TITLE,
+		LEAD(TITLE,1,9999) OVER(ORDER BY NO) AS NEXTTITLE,
+		LAG(TITLE,1,9999) OVER(ORDER BY NO) AS LASTTITLE,
+		CONTENT
+		FROM METRO_NOTICE
+		ORDER BY NO DESC)
 		WHERE no=#{no}
 	</select>
 	<!-- 조회수 업데이트 -->

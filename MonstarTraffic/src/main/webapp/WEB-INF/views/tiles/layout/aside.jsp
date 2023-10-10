@@ -20,6 +20,9 @@
 				<li><a href="${ctx }/metro/jam">지하철 1~8호선 혼잡도 정보</a></li>
 				<li><a href="${ctx }/subwaylift">지하철 휠체어 리프트 정보</a></li>
 				<li><a href="${ctx }/amenities">지하철 편의시설 현황</a></li>
+				<li><a href="${ctx }/riderAccident">자전거 사고현황</a></li>
+				<li><a href="${ctx }/bike/bikeStationInfo">서울시 공공자전거 대여소 정보</a></li>
+				<li><a href="${ctx }/bike/bikeUse">서울시 공공자전거 대여소별 이용정보</a></li>
 			</ul>
 		</nav>
 	</aside>

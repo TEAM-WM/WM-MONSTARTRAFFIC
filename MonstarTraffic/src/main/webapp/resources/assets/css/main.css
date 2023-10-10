@@ -10,7 +10,7 @@ main {
     gap: 20px;
 }
 .aside-wrap{
-    width: 250px;
+    width: 270px;
     text-align: left;
 }
 .aside-title{
@@ -39,7 +39,7 @@ main {
 
 /* 콘텐츠 영역 */
 .content-wrap{
-    width: calc(var(--desktop-size) - 250px);
+    width: calc(var(--desktop-size) - 270px);
     padding: 70px 0;
 }
 
@@ -127,4 +127,18 @@ main {
 }
 .category-sub > ul > li.active a{
 	font-weight: 600;
+}
+.board-pagination{
+    width: 100%;
+    margin-bottom: 70px;
+}
+.board-pagination > div{
+    padding: 30px 20px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.board-pagination > div >a{
+    margin-left: 20px;
 }
