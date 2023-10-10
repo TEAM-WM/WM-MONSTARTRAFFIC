@@ -18,21 +18,20 @@ import com.monstar.traffic.dto.HighwayDto;
 public class HighwayService implements ServiceInterface {
 
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSession session;
 
 	public HighwayService() {
 	}
 
-	public HighwayService(SqlSession sqlSession) {
-		super();
-		this.sqlSession = sqlSession;
+	public HighwayService(SqlSession session) {
+		this.session = session;
 	}
 
 	@Override
 	public void execute(Model model) {
 		System.out.println(">>> WAYCOUNT SERVICE >>>");
 		
-		HighwayDao dao=sqlSession.getMapper(HighwayDao.class);
+		HighwayDao dao=session.getMapper(HighwayDao.class);
 		
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
@@ -53,7 +52,7 @@ public class HighwayService implements ServiceInterface {
 //		System.out.println("selWay:"+selWay);
 		
 		JSONArray arr2 = new JSONArray();
-		ArrayList<HighwayDto> avgmonth = dao.avgSpeedbyMonth();
+		ArrayList<HighwayDto> avgmonth = dao.avgSpeedbyMonth00();
 		for(HighwayDto month : avgmonth) {
 			JSONObject obj2 = new JSONObject();
 			obj2.put("month", month.getMonth());

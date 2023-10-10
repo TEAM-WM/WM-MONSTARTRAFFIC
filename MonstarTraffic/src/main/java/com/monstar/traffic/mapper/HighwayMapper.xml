@@ -11,16 +11,21 @@
      	ORDER BY WAY
      </select>
      
-     <select id="avgSpeedbyMonth" resultType="com.monstar.traffic.dto.HighwayDto">
+     <select id="avgSpeedbyMonth00" resultType="com.monstar.traffic.dto.HighwayDto">
      	SELECT MONTH, AVGSPEED, WAY
 		FROM HIGHWAY
 		WHERE WAY='강남순환로'
      </select>
      
-     <!-- <select id="avgSpeedbyMonth" resultType="com.monstar.traffic.dto.HighwayDto">
+     <select id="avgSpeedbyMonth01" resultType="com.monstar.traffic.dto.HighwayDto">
      	SELECT MONTH, AVGSPEED, WAY
 		FROM HIGHWAY
 		WHERE WAY=#{param1}
-     </select> -->
+     </select>
 
+	<select id="avgSpeedbyDay" resultType="com.monstar.traffic.dto.HighwayDto">
+		select way, monday, tuesday, wednesday, thursday, friday, saturday, sunday
+		from highway
+		where way='강남순환로' and month='1';
+	</select>
 </mapper>
