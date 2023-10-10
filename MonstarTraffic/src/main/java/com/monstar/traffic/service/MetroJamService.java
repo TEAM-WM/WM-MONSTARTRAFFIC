@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import org.springframework.ui.Model;
 
 import com.monstar.traffic.dao.MetroDao;
 import com.monstar.traffic.dto.MetroJamDto;
-
+//리연 작성 230920
 public class MetroJamService implements ServiceInterface {
 
 	@Autowired
@@ -51,6 +49,8 @@ public class MetroJamService implements ServiceInterface {
 		dto.setLinename(linename);
 		ArrayList<MetroJamDto> list = dao.listJam(dto);
 		ArrayList<MetroJamDto> linelist = dao.listJamLine(dto);
+		ArrayList<MetroJamDto> lineHighlist = dao.listJamLineHigh(dto);
+		ArrayList<MetroJamDto> lineHighlistALL = dao.listJamLineHighALL();
 		for (MetroJamDto d : list) {
 			Map<Object, Object> map = new HashMap<>();
 			map.put("serial_number", d.getSerial_number());
@@ -105,6 +105,8 @@ public class MetroJamService implements ServiceInterface {
 //		System.out.println(jsonList.toString());
 		model.addAttribute("list", jsonList);
 		model.addAttribute("linelist",linelist);
+		model.addAttribute("lineHighlist",lineHighlist);
+		model.addAttribute("lineHighlistALL",lineHighlistALL);
 	}// method
 
 }// service

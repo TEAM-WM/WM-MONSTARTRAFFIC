@@ -7,46 +7,54 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- 
 <style>
-h3 {
-margin: 0 auto; /* 가운데 정렬 */
-padding-left: 20px;
-}
-
+/* 
 div {
-margin: 0 auto; /* 가운데 정렬 */
-padding-top: 20px;
+margin: 0 auto; /* 테이블을 가운데로 정렬 
 padding-bottom: 20px;
-margin-bottom: 30px;
-width: 90%;
+} */
+
+div#map {
+padding-top: 20px;
+margin-bottom: 50px;
+height: 500px;
 z-index: 1; /* 다른 요소 위에 표시 */
 }
+/* 
+.input-group {
+width: 50%;
+} */
 
-table {
-margin: 0 auto; /* 가운데 정렬 */
-padding-top: 20px;
+/* .container {
+margin-top: 50px;
+}
+ */
+#tableButton {
+margin-top: 10px;
+margin-bottom: 20px;
+}
+
+/* table {
+margin: 0 auto; /* 테이블을 가운데로 정렬
 text-align: center;
 border-collapse: collapse;
 width: 80%;
-}
-
-.input-group {
-margin-top: 70px;
-width: 70%
-}
+} */
 </style>
+<!-- Kakao Maps JavaScript API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=98444eefa8d89c60d220fff58bde50de"></script>
 </head>
 
 <body>
-<header><h3>지하철 역사 내 편의시설 정보</h3></header>
+	<header>
+		<h3>지하철 역사 내 편의시설 정보</h3>
+	</header>
 
-<section>
-<div>
-    <canvas id="lineChart" width="800" height="400"></canvas>
-</div>
+	<section>
+		<div>
+			<canvas id="lineChart" width="800" height="400"></canvas>
+		</div>
 
 <script>
 // 그래픽 차트의 폰트 설정
@@ -138,45 +146,43 @@ width: 70%
     }
 
 </script>
+	</section>
+	<section>
+		<!-- 역명 검색창 -->
+        <div class="search-wrap">
+			<div class="search-form-wrap">
+					<input type="text" id="stationSearch" class="form-control" placeholder="지하철 역명을 입력하세요." />
+					<input type="submit" value="검색"  onclick="searchStation()">
+			</div>
+		</div>
+		<table border="1" id="amenityTable">
+			<tr>
+				<td>호선</td>
+				<td>역명</td>
+				<td>엘리베이터</td>
+				<td>에스컬레이터</td>
+				<td>휠체어리프트</td>
+				<td>수평자동보도</td>
+			</tr>
 
-<hr />
-<!-- 역명 검색창 -->
-<div class="input-group">
-    <input type="text" id="stationSearch" class="form-control" placeholder="지하철 역명을 입력하세요." />
-    <button class="btn btn-primary" onclick="searchStation()">검색</button>
-</div>
+			<c:forEach items="${amenityinfo }" var="amenityinfo">
+				<tr>
+					<td>${amenityinfo.line }</td>
+					<td>${amenityinfo.statn_nm }</td>
+					<td>${amenityinfo.elvtr }</td>
+					<td>${amenityinfo.escltr }</td>
+					<td>${amenityinfo.wheelchair_lift }</td>
+					<td>${amenityinfo.hrzntlty_atmc_ftpth }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</section>
 
-	<table border="1" id="amenityTable">
-    <tr>
-		<td>호선</td>
-		<td>역명</td>
-		<td>엘리베이터</td>
-		<td>에스컬레이터</td>
-		<td>휠체어리프트</td>
-		<td>수평자동보도</td>
-	</tr>
-
-	<c:forEach items="${amenityinfo }" var="amenityinfo">
-		<tr>
-		<td>${amenityinfo.line }</td>
-		<td>${amenityinfo.statn_nm }</td>
-		<td>${amenityinfo.elvtr }</td>
-    	<td>${amenityinfo.escltr }</td>
-    	<td>${amenityinfo.wheelchair_lift }</td>
-    	<td>${amenityinfo.hrzntlty_atmc_ftpth }</td>
-    	</tr>
-	</c:forEach>
-	</table>
-    	 <br/>
-</section>
-
-<script>
+	<script>
 	document.title = "MonstarTraffic :: 서울 지하철 역사 내 취약계층을 위한 편의시설 정보"; 
-</script>
-<hr />
-</body>
-
+	</script>
 <footer>
-    <p>데이터 출처: 서울시 공공데이터 포털(<a href="http://data.seoul.go.kr/dataList/OA-11573/S/1/datasetView.do">링크</a>)</p>
+		<p>데이터 출처: 서울시 공공데이터 포털(<a href="http://data.seoul.go.kr/dataList/OA-11573/S/1/datasetView.do">링크</a>)</p>
 </footer>
+</body>
 </html>

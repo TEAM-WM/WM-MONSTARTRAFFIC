@@ -12,16 +12,12 @@
 <title>몬스타트래픽</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/base.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div class="container">
 		<tiles:insertAttribute name="header" />
-		<main>
-			<tiles:insertAttribute name="aside" />
-			<article class="content-wrap">
+		<main style="width:100%;">
+			<article style="width:100%;">
 				<tiles:insertAttribute name="main" />
 			</article>
 		</main>
