@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monstar.traffic.dao.AccidentDao">
+
+
+	<!-- 2019년 월별 사고 -->
+<!-- 	<select id="get2019stats"
+		resultType="com.monstar.traffic.dto.AccidentDto">
+		SELECT YEAR2019, SUM, JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
+		JULY, AUGUST, SEPTEMBER,OCTOBER,NOVEMBER, DECEMBER FROM ACCIDENT2019
+		WHERE YEAR2019 = 'ACCIDENT'
+	</select>
+	
+	<select id="get2020stats"
+		resultType="com.monstar.traffic.dto.AccidentDto">
+		SELECT YEAR2020, SUM, JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
+		JULY, AUGUST, SEPTEMBER,OCTOBER,NOVEMBER, DECEMBER FROM ACCIDENT2019
+		WHERE YEAR2020 = 'ACCIDENT'
+	</select>
+ -->	
+	<select id="getstats"
+		resultType="com.monstar.traffic.dto.AccidentDto">
+		SELECT ${columnname}, SUM, JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
+		JULY, AUGUST, SEPTEMBER,OCTOBER,NOVEMBER, DECEMBER FROM ${tablename}
+		WHERE ${columnname} = 'ACCIDENT'
+	</select>
+
+
+
+
+</mapper>
