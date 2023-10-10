@@ -62,7 +62,7 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25d149a1123bfbb2452d5df6e1b341d2&libraries=services,clusterer,drawing"></script>
 	<script>
 		// JSON 파일 경로
-		const jsonFile = '${pageContext.request.contextPath}/resources/assets/seoul.json';
+		const jsonFile = '${pageContext.request.contextPath}/resources/assets/json/seoul2.json';
 		// 지도에 폴리곤으로 표시할 영역데이터 배열입니다 
 		var areas = [];
 
