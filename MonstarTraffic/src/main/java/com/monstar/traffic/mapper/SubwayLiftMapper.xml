@@ -21,21 +21,6 @@
 		<!-- 연관된 컬렉션 매핑 -->
 	</resultMap>
 
-<!-- 	<sql id="includeList">
-			<choose>
-				<when test="param4==1">
-					WHERE EMD_NM LIKE '%'||#{param3}||'%'
-				</when>
-				<when test="param4==2">
-					WHERE SW_NM LIKE '%'||#{param3}||'%'
-				</when>
-				<when test="param4==3">
-					WHERE EMD_NM LIKE '%'||#{param3}||'%' OR SW_NM LIKE '%'||#{param3}||'%'
-				</when>
-				<otherwise></otherwise>
-			</choose>
-		</sql> -->
-
 	<!-- 서울 지하철 출입구 리프트 현황 -->
 	<select id="subwaylift"
 		parameterType="com.monstar.traffic.dto.SubwayLiftDto"
@@ -52,35 +37,5 @@
 				SW_NM FROM SUBWAYLIFT 
 			ORDER BY SGG_CDE ASC, EMD_CD ASC, SW_CD ASC
 	</select>
-
-	<!-- SELECT * FROM
-		(SELECT ROWNUM NUM, N.* FROM
-		(SELECT TYPE,
-				NODE_WKT,
-				NODE_ID,
-				NODE_CODE,
-				SGG_CDE,
-				SGG_NM,
-				EMD_CD,
-				EMD_NM,
-				SW_CD,
-				SW_NM FROM SUBWAYLIFT 
-			ORDER BY SGG_CDE ASC, EMD_CD ASC, SW_CD ASC) N
-			<include refid="includeList"/>
-		)
-		WHERE NUM BETWEEN #{param1} AND #{param2} -->
-
-	<!-- <select id="selectBoardTotCount1" resultType="Integer">
-		SELECT COUNT(*) FROM SUBWAYLIFT WHERE EMD_NM LIKE '%'||#{param1}||'%'
-	</select>
-	<select id="selectBoardTotCount2" resultType="Integer">
-		SELECT COUNT(*) FROM SUBWAYLIFT WHERE SW_NM LIKE '%'||#{param1}||'%'
-	</select>
-	<select id="selectBoardTotCount3" resultType="Integer">
-		SELECT COUNT(*) FROM SUBWAYLIFT WHERE EMD_NM LIKE '%'||#{param1}||'%' OR SW_NM LIKE '%'||#{param1}||'%'
-	</select>
-	<select id="selectBoardTotCount4" resultType="Integer">
-		SELECT COUNT(*) FROM SUBWAYLIFT
-	</select> -->
 
 </mapper>
