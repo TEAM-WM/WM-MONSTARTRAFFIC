@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monstar.traffic.dao.RiderAccidentDao">
+
+
+	<select id="manSex" resultType="com.monstar.traffic.dto.RiderAccidentVo">
+
+	select manSex,count(manSex) as sexSum from rider_accident
+	where accidentRegion like '%'||#{searchRegion}||'%' and manSex not in('기타불명') and
+	accidentDay BETWEEN TO_DATE(''||#{searchYear}||'-01-01', 'YYYY-MM-DD') and 
+	TO_DATE(''||#{searchYear}||'-12-31', 'YYYY-MM-DD') and 
+	manSex not in('없음') 
+	group by manSex 	
+		
+    </select>
+  	<select id="vehicleAccident" resultType="com.monstar.traffic.dto.RiderAccidentVo">  
+	select accidentVehicle,count(accidentVehicle) as vehicleSum from rider_accident 
+		where accidentRegion like '%'||#{searchRegion}||'%' and 
+		accidentDay BETWEEN TO_DATE(''||#{searchYear}||'-01-01', 'YYYY-MM-DD') and 
+		TO_DATE(''||#{searchYear}||'-12-31', 'YYYY-MM-DD') 
+		and accidentRegion not in('불명')  
+		group by accidentVehicle  
+    </select>
+    
+   	<select id="monthAccident" resultType="com.monstar.traffic.dto.RiderAccidentVo">  
+	SELECT TO_CHAR(accidentDay, 'YYYY-MM') AS yyyymm  ,
+		sum(injuryNum) injurySum,sum(deadNum) deadSum FROM rider_accident
+		WHERE accidentRegion like '%'||#{searchRegion}||'%' and accidentDay BETWEEN  
+		TO_DATE(''||#{searchYear}||'-01-01', 'YYYY-MM-DD')  
+		AND TO_DATE(''||#{searchYear}||'-12-31', 'YYYY-MM-DD') 
+		GROUP BY TO_CHAR(accidentDay, 'YYYY-MM') 	
+		ORDER BY yyyymm 
+    </select>   
+    
+    <select id="ageAccident" resultType="com.monstar.traffic.dto.RiderAccidentVo">  
+	select to_number(manAge) as manAge  from rider_accident 
+	  where accidentRegion like  '%'||#{searchRegion}||'%'  and  
+	  manAge not in('불명','없음') and 
+	  accidentDay BETWEEN TO_DATE(''||#{searchYear}||'-01-01', 'YYYY-MM-DD') 
+	  AND TO_DATE(''||#{searchYear}||'-12-31', 'YYYY-MM-DD')
+	  order by accidentRegion asc
+    </select>   
+    <select id="hourAccident" resultType="com.monstar.traffic.dto.RiderAccidentVo">  
+  	select accidentHour,injuryNum,deadNum from 
+	 	rider_accident where accidentRegion like '%'||#{searchRegion}||'%'  
+	 	and accidentDay 
+	 	BETWEEN TO_DATE(''||#{searchYear}||'-01-01', 'YYYY-MM-DD') 
+	 	AND TO_DATE(''||#{searchYear}||'-12-31', 'YYYY-MM-DD') 
+	 	order by accidentRegion asc 
+    </select>  
+ 
+</mapper>
