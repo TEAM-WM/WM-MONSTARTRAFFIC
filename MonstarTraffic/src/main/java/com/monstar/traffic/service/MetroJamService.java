@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 
 import com.monstar.traffic.dao.MetroDao;
 import com.monstar.traffic.dto.MetroJamDto;
-
+//리연 작성 230920
 public class MetroJamService implements ServiceInterface {
 
 	@Autowired
@@ -29,9 +29,29 @@ public class MetroJamService implements ServiceInterface {
 	public void execute(Model model) {
 		MetroDao dao = sqlSession.getMapper(MetroDao.class);
 		ArrayList<JSONObject> jsonList = new ArrayList<JSONObject>(); // JSON 객체를 담을 리스트
-
-		ArrayList<MetroJamDto> dto = dao.list2();
-		for (MetroJamDto d : dto) {
+		
+		MetroJamDto dto = new MetroJamDto();
+//		DEPARTURESTATION=#{departurestation} AND LINENAME=#{linename}
+		Map<String, Object> asMap = model.asMap();
+		String departurestation= (String) asMap.get("departurestation");
+		String line = (String)asMap.get("linename");
+		int linename=0;
+		if(line==null) {
+			linename=1;
+		}else {
+			linename=Integer.parseInt(line);
+		}
+		if(departurestation == null) {
+			departurestation="서울역";
+		}
+		
+		dto.setDeparturestation(departurestation);
+		dto.setLinename(linename);
+		ArrayList<MetroJamDto> list = dao.listJam(dto);
+		ArrayList<MetroJamDto> linelist = dao.listJamLine(dto);
+		ArrayList<MetroJamDto> lineHighlist = dao.listJamLineHigh(dto);
+		ArrayList<MetroJamDto> lineHighlistALL = dao.listJamLineHighALL();
+		for (MetroJamDto d : list) {
 			Map<Object, Object> map = new HashMap<>();
 			map.put("serial_number", d.getSerial_number());
 			map.put("dayofweekdivision", d.getDayofweekdivision());
@@ -84,6 +104,9 @@ public class MetroJamService implements ServiceInterface {
 		} // for
 //		System.out.println(jsonList.toString());
 		model.addAttribute("list", jsonList);
+		model.addAttribute("linelist",linelist);
+		model.addAttribute("lineHighlist",lineHighlist);
+		model.addAttribute("lineHighlistALL",lineHighlistALL);
 	}// method
 
 }// service

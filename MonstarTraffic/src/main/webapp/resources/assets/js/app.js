@@ -24,7 +24,7 @@ const subDropdown = document.querySelector('.sub-dropdown');
 const subMenu = subDropdown.querySelector('.sub-menu');
 
 subDropdown.addEventListener('click', function(e) {
-  e.preventDefault(); // 클릭 시 페이지 이동 방지
+//  e.preventDefault(); // 클릭 시 페이지 이동 방지
   subDropdown.classList.toggle('active');
   subMenu.classList.toggle('active');
 });

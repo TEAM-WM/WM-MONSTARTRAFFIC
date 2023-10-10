@@ -16,6 +16,9 @@
 				<li>
 					<a href="${pageContext.request.contextPath}/notice">공지사항</a>
 				</li>
+				<li>
+					<a href="${pageContext.request.contextPath}/bike/bikeNotice">서울시 공공자전거 공지사항</a>
+				</li>
 			</ul>
 		</nav>
 	</aside>

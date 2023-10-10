@@ -1,0 +1,41 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 230920 / 효슬 추가 -->
+<mapper namespace="com.monstar.traffic.dao.SubwayLiftDao">
+
+	<!-- resultMap 정의 -->
+	<resultMap type="com.monstar.traffic.dto.SubwayLiftDto"
+		id="SubwayLift">
+		<!-- 컬럼과 프로퍼티 매핑 -->
+		<result column="TYPE" property="type" />
+		<result column="NODE_WKT" property="node_wkt" />
+		<result column="NODE_ID" property="node_id" />
+		<result column="NODE_CODE" property="node_code" />
+		<result column="SGG_CDE" property="sgg_cde" />
+		<result column="SGG_NM" property="sgg_nm" />
+		<result column="EMD_CD" property="emd_cd" />
+		<result column="EMD_NM" property="emd_nm" />
+		<result column="SW_CD" property="sw_cd" />
+		<result column="SW_NM" property="sw_nm" />
+		<!-- 연관된 컬렉션 매핑 -->
+	</resultMap>
+
+	<!-- 서울 지하철 출입구 리프트 현황 -->
+	<select id="subwaylift"
+		parameterType="com.monstar.traffic.dto.SubwayLiftDto"
+		resultMap="SubwayLift">
+			SELECT TYPE,
+				NODE_WKT,
+				NODE_ID,
+				NODE_CODE,
+				SGG_CDE,
+				SGG_NM,
+				EMD_CD,
+				EMD_NM,
+				SW_CD,
+				SW_NM FROM SUBWAYLIFT 
+			ORDER BY SGG_CDE ASC, EMD_CD ASC, SW_CD ASC
+	</select>
+
+</mapper>
