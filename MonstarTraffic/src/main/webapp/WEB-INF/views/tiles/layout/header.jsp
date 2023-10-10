@@ -24,6 +24,7 @@
 								<li><a href="${ctx }/metro/jam">지하철 1~8호선 혼잡도 정보</a></li>
 								<li><a href="${ctx }/subwaylift">지하철 휠체어 리프트 정보</a></li>
 								<li><a href="${ctx }/amenities">지하철 편의시설 현황</a></li>
+								<li><a href="${ctx }/riderAccident">관악/구로구 자전거 사고현황</a></li>
 							</ul>
 						</div></li>
 					<li><a href="${ctx}/notice">알림마당</a></li>
