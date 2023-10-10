@@ -39,6 +39,12 @@ body {
 }
 
 /* 정렬 */
+.space{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+}
 .center {
     text-align: center !important;
 }
@@ -116,9 +122,13 @@ select{
 }
 
 .arrow-up::before {
-    content: "\f062";
-    font-family: "FontAwesome";
-    font-weight: 900;
+	content: "\f062";
+	font-family: "FontAwesome";
+	font-weight: 900;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .arrow-up.visible {
@@ -341,6 +351,9 @@ button
 .search-wrap .search-form-wrap{
     width: 60%;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
 }
 .search-wrap .search-form-wrap form{
     width: 100%;

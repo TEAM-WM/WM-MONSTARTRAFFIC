@@ -3,14 +3,16 @@ package com.monstar.traffic.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+// 리연 작성 230920
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class MetroJamDto {
+	private String most_congested_time_hour; // 최대 혼잡도 시간 
+	private Double most_congested_time;  // 최대 혼잡도
 	private Double serial_number;		// 연번 - 일련번호
 	private String dayofweekdivision;	// 요일구분 - 평일 토요일 공휴일 요일 구분 
-	private Double linename;			// 지하철 호선
+	private int linename;			// 지하철 호선
 	private Double externalstationcode; // 외부역 코드
 	private String departurestation;	// 출발역 이름
 	private String divisionname;		// 운행방향

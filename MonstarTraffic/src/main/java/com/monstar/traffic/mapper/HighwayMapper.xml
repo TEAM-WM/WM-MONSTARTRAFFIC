@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monstar.traffic.dao.HighwayDao">
+
+<select id="sumCountByWay" resultType="com.monstar.traffic.dto.HighwayDto">
+     	SELECT WAY, SUM(DAYAVGCOUNT) WAY_SUM
+     	FROM HIGHWAY
+     	GROUP BY WAY
+     	ORDER BY WAY
+     </select>
+     
+     <select id="avgSpeedbyMonth" resultType="com.monstar.traffic.dto.HighwayDto">
+     	SELECT MONTH, AVGSPEED, WAY
+		FROM HIGHWAY
+		WHERE WAY='강남순환로'
+     </select>
+     
+     <!-- <select id="avgSpeedbyMonth" resultType="com.monstar.traffic.dto.HighwayDto">
+     	SELECT MONTH, AVGSPEED, WAY
+		FROM HIGHWAY
+		WHERE WAY=#{param1}
+     </select> -->
+
+</mapper>

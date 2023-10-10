@@ -4,10 +4,134 @@
 <!-- 230920 / 리연 추가 -->
 <mapper namespace="com.monstar.traffic.dao.MetroDao">
 
-	<select id="list" resultType="com.monstar.traffic.dto.MetroElevatorDto">
+	<select id="listElevator" resultType="com.monstar.traffic.dto.MetroElevatorDto">
 		SELECT * FROM METRO_ELEVATOR
 	</select>
-	<select id="list2" resultType="com.monstar.traffic.dto.MetroJamDto">
-		SELECT * FROM METRO_CONGESTION WHERE DEPARTURESTATION='서울역' AND LINENAME=1
+	
+	<!-- 호선별 혼잡도 정보 -->
+	<select id="listJam" parameterType="com.monstar.traffic.dto.MetroJamDto" resultType="com.monstar.traffic.dto.MetroJamDto">
+		SELECT * FROM METRO_CONGESTION WHERE DEPARTURESTATION=#{departurestation} AND LINENAME=#{linename}
+	</select>
+	
+	<!-- 호선별 지하철 역명 -->
+	<select id="listJamLine" parameterType="com.monstar.traffic.dto.MetroJamDto" resultType="com.monstar.traffic.dto.MetroJamDto">
+		SELECT DISTINCT DEPARTURESTATION FROM METRO_CONGESTION WHERE LINENAME=#{linename} ORDER BY DEPARTURESTATION
+	</select>
+	
+	<!-- 혼잡도 높은 시간에 대한 동적쿼리 -->
+	<sql id="includeTime">
+		GREATEST(
+		COALESCE(AM05_30, 0),COALESCE(AM06_00, 0),COALESCE(AM06_30, 0),COALESCE(AM07_00,0),COALESCE(AM07_30, 0),COALESCE(AM08_00, 0),
+		COALESCE(AM08_30, 0),COALESCE(AM09_00, 0),COALESCE(AM09_30, 0),COALESCE(AM10_00,0),COALESCE(AM10_30, 0),COALESCE(AM11_00, 0),
+		COALESCE(AM11_30, 0),COALESCE(PM12_00, 0),COALESCE(PM12_30, 0),COALESCE(PM13_00,0),COALESCE(PM13_30, 0),COALESCE(PM14_00, 0),
+		COALESCE(PM14_30, 0),COALESCE(PM15_00, 0),COALESCE(PM15_30, 0),COALESCE(PM16_00,0),COALESCE(PM16_30, 0),COALESCE(PM17_00, 0),
+		COALESCE(PM17_30, 0),COALESCE(PM18_00, 0),COALESCE(PM18_30, 0),COALESCE(PM19_00,0),COALESCE(PM19_30, 0),COALESCE(PM20_00, 0),
+		COALESCE(PM20_30, 0),COALESCE(PM21_00, 0),COALESCE(PM21_30, 0),COALESCE(PM22_00,0),COALESCE(PM22_30, 0),COALESCE(PM23_00, 0),
+		COALESCE(PM23_30, 0),COALESCE(AM00_00, 0),COALESCE(AM00_30, 0)
+		)
+	</sql>
+	<!-- 각 호선별 혼잡도 높은 순위 -->
+	<select id="listJamLineHigh"
+	parameterType="com.monstar.traffic.dto.MetroJamDto"
+	resultType="com.monstar.traffic.dto.MetroJamDto">
+	SELECT *
+	FROM ( SELECT DEPARTURESTATION, DAYOFWEEKDIVISION,DIVISIONNAME,
+			<include refid="includeTime" /> AS MOST_CONGESTED_TIME,
+			CASE
+				WHEN <include refid="includeTime" /> = AM05_30 THEN '5시~5시30분'
+				WHEN <include refid="includeTime" /> = AM06_00 THEN '6시~6시30분'
+				WHEN <include refid="includeTime" /> = AM06_30 THEN '6시30분~7시'
+				WHEN <include refid="includeTime" /> = AM07_00 THEN '7시~7시30분'
+				WHEN <include refid="includeTime" /> = AM07_30 THEN '7시30분~8시'
+				WHEN <include refid="includeTime" /> = AM08_00 THEN '8시~8시30분'
+				WHEN <include refid="includeTime" /> = AM08_30 THEN '8시30분~9시'
+				WHEN <include refid="includeTime" /> = AM09_00 THEN '9시~9시30분'
+				WHEN <include refid="includeTime" /> = AM09_30 THEN '9시30분~10시'
+				WHEN <include refid="includeTime" /> = AM10_00 THEN '10시~10시30분'
+				WHEN <include refid="includeTime" /> = AM10_30 THEN '10시30분~11시'
+				WHEN <include refid="includeTime" /> = AM11_00 THEN '11시~11시30분'
+				WHEN <include refid="includeTime" /> = AM11_30 THEN '11시30분~12시'
+				WHEN <include refid="includeTime" /> = PM12_00 THEN '12시~12시30분'
+				WHEN <include refid="includeTime" /> = PM12_30 THEN '12시30분~13시'
+				WHEN <include refid="includeTime" /> = PM13_00 THEN '13시~13시30분'
+				WHEN <include refid="includeTime" /> = PM13_30 THEN '13시30분~14시'
+				WHEN <include refid="includeTime" /> = PM14_00 THEN '14시~14시30분'
+				WHEN <include refid="includeTime" /> = PM14_30 THEN '14시30분~15시'
+				WHEN <include refid="includeTime" /> = PM15_00 THEN '15시~15시30분'
+				WHEN <include refid="includeTime" /> = PM15_30 THEN '15시30분~16시'
+				WHEN <include refid="includeTime" /> = PM16_00 THEN '16시~16시30분'
+				WHEN <include refid="includeTime" /> = PM16_30 THEN '16시30분~17시'
+				WHEN <include refid="includeTime" /> = PM17_00 THEN '17시~17시30분'
+				WHEN <include refid="includeTime" /> = PM17_30 THEN '17시30분~18시'
+				WHEN <include refid="includeTime" /> = PM18_00 THEN '18시~18시30분'
+				WHEN <include refid="includeTime" /> = PM18_30 THEN '18시30분~19시'
+				WHEN <include refid="includeTime" /> = PM19_00 THEN '19시~19시30분'
+				WHEN <include refid="includeTime" /> = PM19_30 THEN '19시30분~20시'
+				WHEN <include refid="includeTime" /> = PM20_00 THEN '20시~20시30분'
+				WHEN <include refid="includeTime" /> = PM20_30 THEN '20시30분~21시'
+				WHEN <include refid="includeTime" /> = PM21_00 THEN '21시~21시30분'
+				WHEN <include refid="includeTime" /> = PM21_30 THEN '21시30분~22시'
+				WHEN <include refid="includeTime" /> = PM22_00 THEN '22시~22시30분'
+				WHEN <include refid="includeTime" /> = PM22_30 THEN '22시30분~23시'
+				WHEN <include refid="includeTime" /> = PM23_00 THEN '23시~23시30분'
+				WHEN <include refid="includeTime" /> = PM23_30 THEN '23시30분~00시'
+				WHEN <include refid="includeTime" /> = AM00_00 THEN '00시~00시30분'
+			ELSE '00시30분~1시'
+			END AS MOST_CONGESTED_TIME_HOUR
+			FROM METRO_CONGESTION
+			WHERE LINENAME=#{linename}
+			ORDER BY MOST_CONGESTED_TIME DESC )
+	<![CDATA[WHERE ROWNUM <= 5]]>
+	</select>
+	
+	<!-- 전체 호선 혼잡도 높은 순위 -->
+	<select id="listJamLineHighALL" resultType="com.monstar.traffic.dto.MetroJamDto">
+	SELECT *
+	FROM ( SELECT DEPARTURESTATION, DAYOFWEEKDIVISION, DIVISIONNAME, LINENAME,
+			<include refid="includeTime" /> AS MOST_CONGESTED_TIME,
+			CASE
+				WHEN <include refid="includeTime" /> = AM05_30 THEN '5시~5시30분'
+				WHEN <include refid="includeTime" /> = AM06_00 THEN '6시~6시30분'
+				WHEN <include refid="includeTime" /> = AM06_30 THEN '6시30분~7시'
+				WHEN <include refid="includeTime" /> = AM07_00 THEN '7시~7시30분'
+				WHEN <include refid="includeTime" /> = AM07_30 THEN '7시30분~8시'
+				WHEN <include refid="includeTime" /> = AM08_00 THEN '8시~8시30분'
+				WHEN <include refid="includeTime" /> = AM08_30 THEN '8시30분~9시'
+				WHEN <include refid="includeTime" /> = AM09_00 THEN '9시~9시30분'
+				WHEN <include refid="includeTime" /> = AM09_30 THEN '9시30분~10시'
+				WHEN <include refid="includeTime" /> = AM10_00 THEN '10시~10시30분'
+				WHEN <include refid="includeTime" /> = AM10_30 THEN '10시30분~11시'
+				WHEN <include refid="includeTime" /> = AM11_00 THEN '11시~11시30분'
+				WHEN <include refid="includeTime" /> = AM11_30 THEN '11시30분~12시'
+				WHEN <include refid="includeTime" /> = PM12_00 THEN '12시~12시30분'
+				WHEN <include refid="includeTime" /> = PM12_30 THEN '12시30분~13시'
+				WHEN <include refid="includeTime" /> = PM13_00 THEN '13시~13시30분'
+				WHEN <include refid="includeTime" /> = PM13_30 THEN '13시30분~14시'
+				WHEN <include refid="includeTime" /> = PM14_00 THEN '14시~14시30분'
+				WHEN <include refid="includeTime" /> = PM14_30 THEN '14시30분~15시'
+				WHEN <include refid="includeTime" /> = PM15_00 THEN '15시~15시30분'
+				WHEN <include refid="includeTime" /> = PM15_30 THEN '15시30분~16시'
+				WHEN <include refid="includeTime" /> = PM16_00 THEN '16시~16시30분'
+				WHEN <include refid="includeTime" /> = PM16_30 THEN '16시30분~17시'
+				WHEN <include refid="includeTime" /> = PM17_00 THEN '17시~17시30분'
+				WHEN <include refid="includeTime" /> = PM17_30 THEN '17시30분~18시'
+				WHEN <include refid="includeTime" /> = PM18_00 THEN '18시~18시30분'
+				WHEN <include refid="includeTime" /> = PM18_30 THEN '18시30분~19시'
+				WHEN <include refid="includeTime" /> = PM19_00 THEN '19시~19시30분'
+				WHEN <include refid="includeTime" /> = PM19_30 THEN '19시30분~20시'
+				WHEN <include refid="includeTime" /> = PM20_00 THEN '20시~20시30분'
+				WHEN <include refid="includeTime" /> = PM20_30 THEN '20시30분~21시'
+				WHEN <include refid="includeTime" /> = PM21_00 THEN '21시~21시30분'
+				WHEN <include refid="includeTime" /> = PM21_30 THEN '21시30분~22시'
+				WHEN <include refid="includeTime" /> = PM22_00 THEN '22시~22시30분'
+				WHEN <include refid="includeTime" /> = PM22_30 THEN '22시30분~23시'
+				WHEN <include refid="includeTime" /> = PM23_00 THEN '23시~23시30분'
+				WHEN <include refid="includeTime" /> = PM23_30 THEN '23시30분~00시'
+				WHEN <include refid="includeTime" /> = AM00_00 THEN '00시~00시30분'
+			ELSE '00시30분~1시'
+			END AS MOST_CONGESTED_TIME_HOUR
+			FROM METRO_CONGESTION
+			ORDER BY MOST_CONGESTED_TIME DESC )
+	<![CDATA[WHERE ROWNUM <= 5]]>
 	</select>
 </mapper>
