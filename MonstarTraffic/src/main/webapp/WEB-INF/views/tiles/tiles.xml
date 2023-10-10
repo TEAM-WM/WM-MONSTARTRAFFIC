@@ -40,11 +40,9 @@
 
 	<!-- 메인 레이아웃 -->
 	<definition name="*"
-		template="/WEB-INF/views/tiles/layout.jsp">
+		template="/WEB-INF/views/tiles/layout2.jsp">
 		<put-attribute name="header"
 			value="/WEB-INF/views/tiles/layout/header.jsp" />
-		<put-attribute name="aside"
-			value="/WEB-INF/views/tiles/layout/aside.jsp" />
 		<put-attribute name="main"
 			value="/WEB-INF/views/home.jsp" />
 		<put-attribute name="footer"
