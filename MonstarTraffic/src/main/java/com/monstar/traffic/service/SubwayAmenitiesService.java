@@ -15,7 +15,7 @@ import org.springframework.ui.Model;
 
 import com.monstar.traffic.dao.SubwayAmenitiesDao;
 import com.monstar.traffic.dto.SubwayAmenitiesDto;
-import com.monstar.traffic.vo.SearchVO;
+import com.monstar.traffic.vopage.SearchVO;
 
 @Service
 @Primary

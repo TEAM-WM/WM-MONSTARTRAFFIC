@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.monstar.traffic.service.ServiceInterface;
 import com.monstar.traffic.service.SubwayAmenitiesService;
-import com.monstar.traffic.vo.SearchVO;
+import com.monstar.traffic.vopage.SearchVO;
 
 @Controller
 public class SubwayAmenitiesController {
