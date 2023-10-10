@@ -380,7 +380,7 @@ button
     position: relative;
 }
 .search-wrap .search-form-wrap form input[type="text"]{
-    padding-left: 70px;
+    padding-left: 110px;
 }
 .search-wrap .search-form-wrap form select{
     position: absolute;
