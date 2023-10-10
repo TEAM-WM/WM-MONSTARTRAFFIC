@@ -63,6 +63,16 @@ select{
     background: none;
     border: none;
 }
+.label-select-box{
+	display: flex;
+	width:400px;
+	justify-content: flex-start;
+	align-items: center;
+	gap:10px;
+}
+.label-select-box > label{
+	width:max-content;
+}
 .select-group{
     position: relative;
     width: 300px;
@@ -76,7 +86,7 @@ select{
     border-radius: 5px;
     transition:all 200ms ease-in-out;
     appearance: none;
-    color: #d9d9d9;
+    color: #787878;
 }
 .select-group:hover .form-select{
     border-color: var(--color-main);
@@ -349,7 +359,8 @@ input:active,textarea:hover {
 
 input[type="submit"],
 input[type="button"],
-button
+button,
+.btn-wrap > a
 {   
     background-color: var(--color-main);
     border: 1px solid var(--color-main);

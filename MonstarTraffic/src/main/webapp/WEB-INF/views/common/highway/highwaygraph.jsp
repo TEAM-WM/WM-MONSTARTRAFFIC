@@ -6,16 +6,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<style>
+	.select-group {
+		width:200px;
+	}
+	#wayOutput{
+		display:none;
+	}
+</style>
 </head>
 <body>
-<h3>highwaygraph.jsp</h3>
+<!-- <h3>highwaygraph.jsp</h3>
 
-
-
-<div class="container">
+ -->
+<header>
+	<h3>도로별 교통량 정보</h3>
+</header>
+<section>
+	<div>
+		<canvas width="400" height="200" id="myChartOne"></canvas>
+	</div>
+</section>
+<section>
+	<div class="space">
+		<div>
+		<canvas width="400" height="400" id="myChartTwo"></canvas>
+		</div>
+		<div>
+		<canvas width="400" height="400" id="myChartThree"></canvas>
+		</div>
+	</div>
+</section>
+	<!-- 드롭다운 메뉴 -->
+	<div class="label-select-box">
+		<label for="chartSelection">도로 선택:</label>
+		<div class="select-group">
+		    <select name="selWay" id="chartSelection" onchange="changeChart()" class="form-select">
+		        <option value="강남순환로">강남순환로</option>
+		        <option value="강변북로">강변북로</option>
+		        <option value="경부고속도로">경부고속도로</option>
+		        <option value="내부순환로">내부순환로</option>
+		        <option value="동부간선도로">동부간선도로</option>
+		        <option value="북부간선도로">북부간선도로</option>
+		        <option value="분당수서로">분당수서로</option>
+		        <option value="올림픽대로">올림픽대로</option>
+		    </select>
+		</div>
+	</div>
+<%-- <div class="container">
 	<div class="row">
 		<div class="col-md-12">
 			<canvas width="400" height="200" id="myChartOne"></canvas>
@@ -25,30 +66,16 @@
 		</div>
 		<div class="col-md-6">
 			<canvas width="400" height="400" id="myChartTwo"></canvas>
-			<!-- 드롭다운 메뉴 -->
-			<div class="container mt-4">
-			    <label for="chartSelection">도로 선택:</label>
-			    <select name="selWay" id="chartSelection" onchange="changeChart()">
-			        <option value="강남순환로">강남순환로</option>
-			        <option value="강변북로">강변북로</option>
-			        <option value="경부고속도로">경부고속도로</option>
-			        <option value="내부순환로">내부순환로</option>
-			        <option value="동부간선도로">동부간선도로</option>
-			        <option value="북부간선도로">북부간선도로</option>
-			        <option value="분당수서로">분당수서로</option>
-			        <option value="올림픽대로">올림픽대로</option>
-			    </select>
-			</div>
 		</div>
 		<div class="col-md-6">
 			<canvas width="400" height="400" id="myChartThree"></canvas>
 		</div>
 	</div>
 </div>
-<div id="wayOutput"></div>
 
 ${arr }
-${arr2 }
+${arr2 } --%>
+<div id="wayOutput"></div>
 
 <script>
 
