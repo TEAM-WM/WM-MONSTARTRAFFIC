@@ -88,4 +88,5 @@
 }
 .global-header-container nav > ul .sub-menu li a{
     color: var(--color-main);
+    font-size: var(--font-small);
 }

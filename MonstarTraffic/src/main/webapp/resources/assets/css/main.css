@@ -10,7 +10,7 @@ main {
     gap: 20px;
 }
 .aside-wrap{
-    width: 250px;
+    width: 270px;
     text-align: left;
 }
 .aside-title{
@@ -39,7 +39,7 @@ main {
 
 /* 콘텐츠 영역 */
 .content-wrap{
-    width: calc(var(--desktop-size) - 250px);
+    width: calc(var(--desktop-size) - 270px);
     padding: 70px 0;
 }
 
