@@ -1,0 +1,118 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 230925 / 진성 추가 -->
+<mapper namespace="com.monstar.traffic.dao.BikeDao">
+	 <!-- 초기화면 월별 대여, 반납 건수 -->
+	<select id="pRentCntMonth" resultType="com.monstar.traffic.dto.BikeDto">
+	    SELECT * FROM
+			(SELECT ROWNUM NUM, N.* FROM
+				(SELECT COUNT(*) CNT, STATIONGRPNAME,STATMN,
+					SUM(RENTCNT) RENTCNT, SUM(RETURNCNT) RETURNCNT
+				FROM BIKESTATION_USEMONTH 
+				WHERE STATMN='230101'
+				GROUP BY STATIONGRPNAME,STATMN
+				ORDER BY STATMN,RENTCNT DESC)
+			N)
+		WHERE NUM BETWEEN 1 AND 5
+    </select>
+    
+    <!-- 월별 대여, 반납 건수 -->
+ 	<select id="rentCntMonth" resultType="com.monstar.traffic.dto.BikeDto">
+	    SELECT * FROM
+			(SELECT ROWNUM NUM, N.* FROM
+				(SELECT COUNT(*) CNT, STATIONGRPNAME,STATMN,
+					SUM(RENTCNT) RENTCNT, SUM(RETURNCNT) RETURNCNT
+				FROM BIKESTATION_USEMONTH 
+				WHERE STATMN=#{param1}
+				GROUP BY STATIONGRPNAME,STATMN
+				ORDER BY STATMN,RENTCNT DESC)
+			N)
+		WHERE NUM BETWEEN 1 AND 5
+    </select>
+    
+    <!-- 초기 자치구별 지도 대여, 반납 건수 -->
+ 	<select id="stationGroName" resultType="com.monstar.traffic.dto.BikeDto">
+	    SELECT SUM(RENTCNT) RENTCNT, SUM(RETURNCNT) RETURNCNT 
+		FROM BIKESTATION_USEMONTH 
+		WHERE STATMN = #{param1}
+			AND STATIONGRPNAME = #{param2}
+		GROUP BY STATIONGRPNAME
+    </select>
+    
+    <!-- 대여소 정보 -->
+ 	<select id="stationInfo" resultType="com.monstar.traffic.dto.BikeDto">
+  		SELECT STA_NO, STA_NM, STA_LOC, STA_ADDR, STA_LAT, STA_LONG,
+			STA_INSTALL, LCD_CNT, QR_CNT, STA_OP 
+		FROM BIKESTATION_INFO
+    </select>
+    
+    <!-- 공지사항 리스트 -->
+ 	<select id="bikeNoticeList" resultType="com.monstar.traffic.dto.BikeDto">
+  		SELECT * FROM 
+    		(SELECT ROWNUM NUM, N.* 
+				FROM (SELECT BIKENO,BTITLE,BCONTENT,BDATE  
+            FROM BIKE_NOTICE ORDER BY BIKENO DESC) N 
+			<include refid="includeList"/>
+		)
+		WHERE NUM BETWEEN #{param1} AND #{param2}
+    </select>
+    
+    <sql id="includeList">
+		<choose>
+			<when test="param4==1">
+				WHERE BTITLE LIKE '%'|| #{param3} ||'%'
+    				OR BCONTENT LIKE '%'|| #{param3} ||'%'
+			</when>
+			<when test="param4==2">
+				WHERE BTITLE LIKE '%'|| #{param3} ||'%'
+			</when>
+			<when test="param4==3">
+				WHERE BCONTENT LIKE '%'|| #{param3} ||'%'
+			</when>
+			<otherwise>
+				
+			</otherwise>
+		</choose>
+	</sql>
+    
+    <!-- 공지사항 글 갯수 -->
+    <select id="TotCount1" resultType="Integer">
+    	SELECT COUNT(*) FROM BIKE_NOTICE 
+    	WHERE BTITLE LIKE '%'|| #{param1} ||'%'
+    		OR BCONTENT LIKE '%'|| #{param1} ||'%'
+    </select>
+    <select id="TotCount2" resultType="Integer">
+    	SELECT COUNT(*) FROM BIKE_NOTICE 
+    	WHERE BTITLE LIKE '%'|| #{param1} ||'%'
+    </select>
+    <select id="TotCount3" resultType="Integer">
+    	SELECT COUNT(*) FROM BIKE_NOTICE 
+    	WHERE BCONTENT LIKE '%'|| #{param1} ||'%'
+    </select>
+    <select id="TotCount4" resultType="Integer">
+    	SELECT COUNT(*) FROM BIKE_NOTICE
+    </select>
+    
+    <!-- 공지사항 디테일 -->
+ 	<select id="bikeNoticeDetail" resultType="com.monstar.traffic.dto.BikeDto">
+  		SELECT BIKENO,BTITLE,BCONTENT,BDATE,BIMG 
+  		FROM BIKE_NOTICE
+  		WHERE BIKENO = #{param1}
+    </select>
+    
+    <!-- 공지사항 이전글 다음글 -->
+    <select id="movePage" parameterType="int" resultType="com.monstar.traffic.dto.BikeDto">
+    	SELECT * FROM(SELECT 
+		BIKENO,
+         LEAD(BIKENO,1,9999) OVER(ORDER BY BIKENO) AS NEXT,
+         LAG(BIKENO,1,9999) OVER(ORDER BY BIKENO) AS LAST,
+         BTITLE,
+         LEAD(BTITLE,1,9999) OVER(ORDER BY BIKENO) AS NEXTTITLE,
+         LAG(BTITLE,1,9999) OVER(ORDER BY BIKENO) AS LASTTITLE
+         
+		FROM BIKE_NOTICE
+        ORDER BY BIKENO DESC) 
+        WHERE BIKENO = #{param1}
+    </select>
+</mapper>
