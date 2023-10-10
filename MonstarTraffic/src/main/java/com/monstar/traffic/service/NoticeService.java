@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 
 import com.monstar.traffic.dao.MetroDao;
 import com.monstar.traffic.dto.NoticeDto;
-import com.monstar.traffic.vo.SearchVO;
+import com.monstar.traffic.vopage.SearchVO;
 
 @Service
 public class NoticeService implements ServiceInterface {
@@ -68,6 +68,10 @@ public class NoticeService implements ServiceInterface {
 				} else if (var.equals("content")) {
 					content = "content";
 					model.addAttribute("content", "true");
+				} else if (var.equals("titcon")) {
+					title = "title";
+					content = "content";
+					model.addAttribute("titcon", "true");
 				}
 			}
 		}
@@ -75,7 +79,15 @@ public class NoticeService implements ServiceInterface {
 		// 페이징에 검색결과유지
 		String searchTitle = request.getParameter("title");
 		String searchContent = request.getParameter("content");
+		String searchTitleContent = request.getParameter("titcon");
 //				변수에 저장
+		if(searchTitleContent != null) {
+			if (searchTitleContent.equals("titcon")) {
+				title = searchTitle;
+				content = searchContent;
+				model.addAttribute("titcon", "true");
+			}
+		}
 		if (searchTitle != null) {// null이 아닐때만 돌아라
 			if (searchTitle.equals("title")) {
 				title = searchTitle;

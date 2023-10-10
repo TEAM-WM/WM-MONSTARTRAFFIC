@@ -42,11 +42,39 @@
 			<h3>${dto.title }</h3>
 		</div>
 		<div id="readEditor">${dto.content}</div>
+		<div class="board-pagination">
+			<div class="board-prev">
+				이전글 <i class="fa-solid fa-caret-up"></i>
+				<c:choose>
+					<c:when test="${dto.next<9999}">
+						<a
+							href="${pageContext.request.contextPath}/notice/view?no=${dto.next}">
+							${dto.nexttitle } </a>
+					</c:when>
+					<c:otherwise>
+						<a> 이전글이 없습니다. </a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="board-next">
+				다음글 <i class="fa-solid fa-caret-down"></i>
+				<c:choose>
+					<c:when test="${dto.last<9999}">
+						<a
+							href="${pageContext.request.contextPath}/notice/view?no=${dto.last}">
+							${dto.lasttitle } </a>
+					</c:when>
+					<c:otherwise>
+						<a> 다음글이 없습니다. </a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 	</section>
+	<!-- board-pagination -->
 	<section class="right">
 		<button onclick="location.href='${pageContext.request.contextPath}/notice'">목록</button>
 	</section>
-
 	<script
 		src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 	<script

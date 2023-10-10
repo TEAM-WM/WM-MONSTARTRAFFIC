@@ -17,6 +17,7 @@
 			<div class="search-form-wrap">
 				<form action="${ctx }/notice" method="post" >
 					<select name="searchType" id="searchType">
+						<option value="titcon" ${titcon ? 'selected' : ''}>제목+내용</option>
 						<option value="title" ${title ? 'selected' : ''}>제목</option>
 						<option value="content" ${content ? 'selected' : ''}>내용</option>
 					</select> 
