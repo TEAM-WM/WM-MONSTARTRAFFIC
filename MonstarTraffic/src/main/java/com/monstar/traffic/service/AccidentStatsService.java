@@ -12,7 +12,7 @@ import com.monstar.traffic.dao.AccidentDao;
 import com.monstar.traffic.dto.AccidentDto;
 
 @Service
-public class AccidentStatsService implements ServiceInterface {
+public class AccidentStatsService implements ServiceInterface2 {
 
     private SqlSession sqlSession;
 
@@ -21,11 +21,9 @@ public class AccidentStatsService implements ServiceInterface {
         this.sqlSession = sqlSession;
     }
     
-    @Override
-    public void execute(Model model) {
-    	return;
-    }
-    
+	/*
+	 * @Override public void execute(Model model) { return; }
+	 */
     @Override
     public void execute(Model model, String year) {
         AccidentDao dao = sqlSession.getMapper(AccidentDao.class);

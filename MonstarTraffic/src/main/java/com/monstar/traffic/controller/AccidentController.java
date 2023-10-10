@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.monstar.traffic.service.AccidentStatsService;
-import com.monstar.traffic.service.ServiceInterface;
+import com.monstar.traffic.service.ServiceInterface2;
 
 @Controller
 @RequestMapping("/accident")
@@ -22,7 +22,7 @@ public class AccidentController {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	ServiceInterface service;
+	ServiceInterface2 service;
 	
 	
 	@RequestMapping("/{year}")
