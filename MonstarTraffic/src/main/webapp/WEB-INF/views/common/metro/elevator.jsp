@@ -43,7 +43,7 @@
 		<div class="search-wrap">
 			<div class="search-form-wrap">
 				<form onsubmit="searchPlaces(); return false;">
-					<input type="text" placeholder="OO동/역명을 입력하세요" id="keyword">
+					<input type="text" placeholder="역명을 입력하세요" id="keyword">
 					<input type="submit" value="검색">
 				</form>
 			</div>
