@@ -26,7 +26,7 @@
 								<li><a href="${ctx }/amenities">지하철 편의시설 현황</a></li>
 								<li><a href="${ctx }/riderAccident">자전거 사고현황</a></li>
 								<li><a href="${ctx }/bike/bikeStationInfo">서울시 공공자전거 대여소 정보</a></li>
-								<li><a href="${ctx }/bike/bikeStationInfo">서울시 공공자전거 대여소별  이용정보</a></li>
+								<li><a href="${ctx }/bike/bikeUse">서울시 공공자전거 대여소별  이용정보</a></li>
 								<li><a href="${ctx }/accident/2019">연도별 월 교통사고 통계</a></li>
 							</ul>
 						</div></li>

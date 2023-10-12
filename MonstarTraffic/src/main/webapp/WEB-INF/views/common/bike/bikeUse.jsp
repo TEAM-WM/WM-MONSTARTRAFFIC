@@ -6,35 +6,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-/* 인포윈도우 */
-.area {
-    position: absolute;
-    background: #fff;
-    border: 1px solid #888;
-    border-radius: 3px;
-    font-size: 12px;
-    top: -5px;
-    left: 15px;
-    padding:2px;
-}
-.info {
-    font-size: 12px;
-    padding: 2px;
-}
-.info .title {
-    font-weight: bold;
-}
-
-/* 차트 */
-.chart-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin : 10px 0;
-}
-.chart-canvas {
-    width: 48%;
-}
+	.select-group {
+			width:120px;
+		}
+	/* 인포윈도우 */
+	.area {
+	    position: absolute;
+	    background: #fff;
+	    border: 1px solid #888;
+	    border-radius: 3px;
+	    font-size: 12px;
+	    top: -5px;
+	    left: 15px;
+	    padding:2px;
+	}
+	.info {
+	    font-size: 12px;
+	    padding: 2px;
+	}
+	.info .title {
+	    font-weight: bold;
+	}
+	/* 차트 */
+	.chart-container {
+	    display: flex;
+	    justify-content: space-between;
+	    width: 100%;
+	    margin : 10px 0;
+	}
+	.chart-canvas {
+	    width: 48%;
+	}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -46,10 +48,10 @@
 </header>
 <section>
 	<div class="container">
-		<div class="select">
-			<div align="left">
-				<b>월별 이용정보</b>
-				<select name="month" id="month" style="border: 1px solid #ccc">
+		<div class="label-select-box">
+			<label for="month">월별 이용정보</label>
+			<div class="select-group">
+				<select name="month" id="month" class="form-select">
 					<option value="230101">23년 1월</option>
 					<option value="230201">23년 2월</option>
 					<option value="230301">23년 3월</option>
@@ -58,20 +60,20 @@
 					<option value="230601">23년 6월</option>
 				</select>		
 			</div>
-			
-			<!-- 자치구별 폴리곤 -->
-			<div id="map" style="width:100%;height:450px;margin:10px 0;"></div>
-			
-			<!-- 자치구별 TOP 5 차트-->
-			<div class="chart-container">
-		        <div class="chart-canvas">
-		            <canvas id="myChartOne" height="200px"></canvas>
-		        </div>
-		        <div class="chart-canvas">
-		            <canvas id="myChartTwo" height="200px"></canvas>
-		        </div>
-		    </div>
 		</div>
+			
+		<!-- 자치구별 폴리곤 -->
+		<div id="map" style="width:100%;height:450px;margin:10px 0;"></div>
+		
+		<!-- 자치구별 TOP 5 차트-->
+		<div class="chart-container">
+	        <div class="chart-canvas">
+	            <canvas id="myChartOne" height="200px"></canvas>
+	        </div>
+	        <div class="chart-canvas">
+	            <canvas id="myChartTwo" height="200px"></canvas>
+	        </div>
+	    </div>
 	</div>
 </section>
 
@@ -204,8 +206,8 @@ function displayArea(area) {
         var content = '<div class="info">' +
             '   <div class="title">' + area.name + '</div>' +
             '   <div class="size">총 면적 : 약 ' + Math.floor(selectedPolygon.getArea()) + ' m<sup>2</sup></div>' +
-            '   <div class="rent">대여 수 :' + data[i].rentmap + '대</div>' +
-            '   <div class="return">반납 수 :' + data[i].returnmap + '대</div>' +
+            '   <div class="rent">대여 수 : ' + data[i].rentmap + '대</div>' +
+            '   <div class="return">반납 수 : ' + data[i].returnmap + '대</div>' +
             '</div>';
     	}
         infowindow.setContent(content);
@@ -276,7 +278,7 @@ myChart1 = new Chart(ctx1,{
 			jArray[4].station
 		],
 		datasets : [{
-			label : '자치구 별 대여 수 TOP 5',
+			label : ' 대여 수 TOP 5',
 			data : [
 				jArray[0].rentsum,
 				jArray[1].rentsum,
@@ -322,7 +324,7 @@ myChart2 = new Chart(ctx2,{
 			jArray[4].station
 			],
 		datasets : [{
-			label : '자치구 별 반납 수 TOP 5',
+			label : ' 반납 수 TOP 5',
 			data : [
 				jArray[0].returnsum,
 				jArray[1].returnsum,
