@@ -19,26 +19,31 @@
 </style>
 </head>
 <body>
-<!-- <h3>highwaygraph.jsp</h3>
 
- -->
 <header>
-	<h3>도로별 교통량 정보</h3>
+	<h3>서울도시고속도로 교통 정보</h3>
 </header>
+
+<h4>도로별 교통 통행량 합</h4>
 <section>
 	<div>
 		<canvas width="400" height="200" id="myChartOne"></canvas>
 	</div>
 </section>
+
+<h4>도시고속도로 월별 평균속도</h4>
 <section>
 	<div class="space">
+		<canvas width="400" height="200" id="myChartTwo"></canvas>
+	</div>
+	<%-- <div class="space">
 		<div>
-		<canvas width="400" height="400" id="myChartTwo"></canvas>
+		<canvas width="400" height="200" id="myChartTwo"></canvas>
 		</div>
 		<div>
 		<canvas width="400" height="400" id="myChartThree"></canvas>
 		</div>
-	</div>
+	</div> --%>
 </section>
 	<!-- 드롭다운 메뉴 -->
 	<div class="label-select-box">
@@ -115,7 +120,7 @@ ${arr2 } --%>
     changeChart();
 }); */
 
-/* 자치구별 월별 이용 정보 */
+// 자치구별 월별 이용 정보
 $(document).ready(function(){
    $("#chartSelection").change(function(){
       var selectedWay = $(this).val();
@@ -143,13 +148,6 @@ var myChart2;
 // 차트 업데이트 함수
 function updateChart(data) {
    for (var i = 0; i < data.length; i++) {
-        // 데이터 업데이트
-      /* myChartOne.data.labels = data.map(function(item) {
-        return item.stationgrpname;
-       });
-       myChartOne.data.datasets[0].data = data.map(function(item) {
-           return item.rentsum;
-       }); */
        myChartTwo.data.labels = data.map(function(item) {
            return item.month+'월';
        });
@@ -157,18 +155,20 @@ function updateChart(data) {
            return item.avgspeed;
       });
    }
+   
+	// myChartTwo의 datasets label 업데이트
+   var selectedWay = document.getElementById('chartSelection').value;
+   myChartTwo.data.datasets[0].label = selectedWay;
+   
     // 차트 다시 렌더링
-    //myChartOne.update();
     myChartTwo.update();
 }
 
+
+
+
 var jArray = new Array();
 jArray = JSON.parse('${arr}');
-
-
-
-
-
 
 var jArray = new Array();
 jArray = '${arr}';
@@ -192,7 +192,7 @@ document.getElementById('wayOutput').textContent = jArray2[0].way;
 
 const ctx1 = document.getElementById('myChartOne').getContext('2d');
 const ctx2 = document.getElementById('myChartTwo').getContext('2d');
-const ctx3 = document.getElementById('myChartThree').getContext('2d');
+//const ctx3 = document.getElementById('myChartThree').getContext('2d');
 
 
 const myChartOne = new Chart(ctx1, {
@@ -210,7 +210,7 @@ const myChartOne = new Chart(ctx1, {
 			jArray[7].way
 			],
 		datasets:[{
-			label:'# 2022년 도로별 교통량 합 ',
+			label:'# 2022년 도로별 교통 통행량 합 ',
 			data:[
 				jArray[0].way_sum,
 				jArray[1].way_sum,
@@ -331,7 +331,7 @@ const myChartTwo= new Chart(ctx2, {
 });
 
 
-const myChartThree = new Chart(ctx3, {
+/* const myChartThree = new Chart(ctx3, {
 	type:'polarArea',
 	//type: bar, pie, line, polarArea, doughnut
 	data:{
@@ -375,7 +375,7 @@ const myChartThree = new Chart(ctx3, {
 			}
 		}
 	}
-});
+}); */
 	
 
 

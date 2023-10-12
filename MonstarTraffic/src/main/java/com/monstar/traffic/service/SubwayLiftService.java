@@ -40,7 +40,7 @@ public class SubwayLiftService implements ServiceInterface {
 			obj.put("node_code", lift.getNode_code());
 			obj.put("sgg_cde", lift.getSgg_cde());
 			obj.put("sgg_nm", lift.getSgg_nm());
-			obj.put("node_code", lift.getEmd_cd()); // 주의: 중복된 키 사용, 수정 필요
+			obj.put("emd_cd", lift.getEmd_cd());
 			obj.put("emd_nm", lift.getEmd_nm());
 			obj.put("sw_cd", lift.getSw_cd());
 			obj.put("sw_nm", lift.getSw_nm());

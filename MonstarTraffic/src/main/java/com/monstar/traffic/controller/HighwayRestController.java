@@ -28,7 +28,6 @@ public class HighwayRestController {
 	ServiceInterface service;
 	
 	@GetMapping("/waydata")
-
 	public JSONArray execute(ServletRequest request, Model model) {
 		System.out.println(">>> RestController >>>");
 		
@@ -54,4 +53,4 @@ public class HighwayRestController {
 		return arr2;
     }
 	
-}//home
+}
